@@ -6,6 +6,6 @@ local Duration = 5
 
 wait(Duration)
 
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 90
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = 1000
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 100
 game.Workspace.Current.FieldOfView = FOV
