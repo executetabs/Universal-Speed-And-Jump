@@ -1,0 +1,11 @@
+--- 1st Ever script by otomchik
+local WalkSpeed = 90
+local JumpPower = 90
+local FOV = 90
+local Duration = 5
+
+wait(Duration)
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 90
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 1000
+game.Workspace.Current.FieldOfView = FOV
