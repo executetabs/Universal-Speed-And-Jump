@@ -1,6 +1,6 @@
 --- 1st Ever script by otomchik
-local WalkSpeed = 90
-local JumpPower = 90
+local WalkSpeed = 100
+local JumpPower = 100
 local FOV = 90
 local Duration = 5
 
