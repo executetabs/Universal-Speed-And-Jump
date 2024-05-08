@@ -1,0 +1,109 @@
+-- CREATED BY @otomchik.1
+-- Version: 1.0
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Aimbot = Instance.new("Frame")
+local AimLabal = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Aimbot.Name = "Aimbot"
+Aimbot.Parent = ScreenGui
+Aimbot.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+Aimbot.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Aimbot.BorderSizePixel = 5
+Aimbot.Position = UDim2.new(0.0258964151, 0, 0.353909463, 0)
+Aimbot.Size = UDim2.new(0, 131, 0, 173)
+
+AimLabal.Name = "AimLabal"
+AimLabal.Parent = Aimbot
+AimLabal.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+AimLabal.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AimLabal.BorderSizePixel = 0
+AimLabal.Position = UDim2.new(0.0305343512, 0, 0, 0)
+AimLabal.Size = UDim2.new(0, 122, 0, 51)
+AimLabal.Font = Enum.Font.SourceSansBold
+AimLabal.Text = "otomchik.1 Aim GUI "
+AimLabal.TextColor3 = Color3.fromRGB(0, 0, 0)
+AimLabal.TextSize = 17.000
+
+TextButton.Parent = Aimbot
+TextButton.BackgroundColor3 = Color3.fromRGB(223, 0, 0)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0, 0, 0.393063575, 0)
+TextButton.Size = UDim2.new(0, 131, 0, 82)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "AIMBOT : OFF"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextScaled = true
+TextButton.TextSize = 14.000
+TextButton.TextWrapped = true
+
+-- Scripts:
+
+local function PUQGTNL_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	_G.aimbot = false
+	local camera = game.Workspace.CurrentCamera
+	local localplayer = game:GetService("Players").LocalPlayer
+	
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if _G.aimbot == false then
+			_G.aimbot = true
+			script.Parent.Text = "AIMBOT: ON"
+			function closestplayer()
+				local dist = math.huge
+				local target = nil
+				for i,v in pairs (game:GetService("Players"):GetPlayers()) do
+					if v ~= localplayer then
+						if v.Character and v.Character:FindFirstChild("Head") and v.TeamColor ~= localplayer.TeamColor and _G.aimbot then 
+							local magnitude = (v.Character.head.position - localplayer.Character.head.Position).magnitude
+							if magnitude <dist then
+								dist = magnitude
+								target = v
+							end
+						end
+					end
+					return target
+			end
+		else
+			_G.aimbot = false
+			script.Parent.Text = "AIMBOT: OFF"
+		end
+	end)
+	
+	local settings =  {
+		keybind = Enum.UserInputType.MouseButton2
+	}
+	
+	local UIS = game:GetService("UserInputService")
+	local aiming = false
+	
+	UIS.InputBegan:Connect(function(inp)
+		if inp.UserInputType == settings.keybind then
+			aiming = true
+		end
+	end)
+	
+	UIS.InputEnded:Connect(function(inp)
+		if inp.UserInputType == settings.keybind then
+			aiming = false
+		end
+	end)
+	
+	game:GetService("RunService").RenderStepped:Connect(function()
+		if aiming then
+			camera.CFrame.new(camera.CFrame.Position.closestplayer().Character.Head.Position)
+			end
+	end)
+end
+coroutine.wrap(PUQGTNL_fake_script)()
